@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helmipade - Pembayaran</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        .payment-info {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .payment-info p {
+            margin: 10px 0;
+        }
+        .button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #004d40;
+        }
+        .upload-form input[type="file"] {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pembayaran Helmipade</h1>
+        <a href="products.html" class="button">Kembali ke Produk</a>
+    </header>
+    <main>
+        <?php
+        if (isset($_GET['product'])) {
+            $product = htmlspecialchars($_GET['product']);
+            ?>
+            <div class="payment-info">
+                <h2>Pembayaran untuk <?php echo $product; ?></h2>
+                <p>Silakan lakukan pembayaran melalui DANA ke nomor berikut:</p>
+                <p><strong>085211667164 atas nama Nurhayati</strong></p>
+                <p>Atau transfer ke Bank BBRI (nomor rekening akan menyusul)</p>
+                <form action="submit_payment.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="product" value="<?php echo $product; ?>">
+                    <input type="file" name="payment_proof" accept="image/*" required>
+                    <input type="submit" value="Kirim Bukti Pembayaran">
+                </form>
+            </div>
+            <?php
+        } else {
+            echo "<p>Produk tidak ditemukan.</p>";
+        }
+        ?>
+    </main>
+</body>
+</html>
